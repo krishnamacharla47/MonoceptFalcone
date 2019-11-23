@@ -1,0 +1,67 @@
+<div class="container">
+
+  <h1 class="text-center">Find Falcone !</h1>
+  <h3 class="text-center">select Planets you want to Search ?</h3>
+<div class="flex-container">
+
+  <div *ngFor="let Vehicle of vehicleList;let i = index">
+        <label class="maxWidth">Destinations{{i+1}}: </label>
+        <select (ngModelChange)="changePlanet1s($event.target.value)" class="form-control">
+          <option value="0">--All--</option>
+          <option *ngFor="let Planet of planetList" value={{Planet.name}}>
+            {{Planet.name}}
+          </option>
+        </select>
+      </div>
+      <!-- <div> -->
+          <!-- <label class="maxWidth">Destination 2: </label>
+          <select (click)="changePlanet2($event.target.value)" class="form-control">
+          
+            <option value="0">--All--</option>
+            <option *ngFor="let Planet of planetList" value={{Planet.name}}>
+                {{Planet.name}}
+            </option>
+          </select>
+        </div>
+        <div>
+            <label class="maxWidth"> Destination 3: </label>
+            <select (click)="changePlanet3($event.target.value)" class="form-control">
+              <option value="0">--All--</option>
+              <option *ngFor="let Planet of planetList" value={{Planet.name}}>
+                  {{Planet.name}}
+              </option>
+            </select>
+          </div>
+          <div >
+              <label class="maxWidth">Destination 4: </label>
+              <select (click)="changePlanet4($event.target.value)" class="form-control">
+                <option value="0">--All--</option>
+                <option *ngFor="let Planet of planetList" value={{Planet.name}}>
+                    {{Planet.name}}
+                </option>
+              </select>
+            </div>
+  </div>
+</div>
+<div class="container">
+ <div class="">
+  <div class="form-check" *ngFor="let Vehicle of vehicleList">
+            <input class="form-check-input" type="radio" name="{{Vehicle.name}}" id="{{Vehicle.name}}" value="{{Vehicle.name}}">
+            <label class="form-check-label" for="{{Vehicle.name}}">
+              {{Vehicle.name}}
+            </label>
+   </div>-->
+ </div>
+ <div class="">
+    <div class="form-check" *ngFor="let Vehicle of vehicleList">
+              <input class="form-check-input" type="radio" name="{{Vehicle.name}}" id="{{Vehicle.name}}" value="{{Vehicle.name}}">
+              <label class="form-check-label" for="{{Vehicle.name}}">
+                {{Vehicle.name}}
+              </label>
+     </div> 
+   </div>
+   
+ <div class="text-center">
+   <button class="text-center">Find Falcone </button>
+ </div>
+</div>

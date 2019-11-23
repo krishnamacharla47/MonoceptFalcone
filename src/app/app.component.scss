@@ -1,0 +1,19 @@
+.flex-container {
+    display: flex;
+    padding:auto;
+    margin:auto;
+    
+  }
+  
+  .flex-container > div {
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+    
+  }
+  .maxWidth{
+      width:100%;
+  }
+  .flex-container .form-control{
+display:initial;
+  }
