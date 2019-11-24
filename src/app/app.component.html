@@ -1,67 +1,110 @@
-<div class="container">
-
+<div class="container" *ngIf="Ismaincontainer">
   <h1 class="text-center">Find Falcone !</h1>
   <h3 class="text-center">select Planets you want to Search ?</h3>
-<div class="flex-container">
-
-  <div *ngFor="let Vehicle of vehicleList;let i = index">
-        <label class="maxWidth">Destinations{{i+1}}: </label>
-        <select (ngModelChange)="changePlanet1s($event.target.value)" class="form-control">
-          <option value="0">--All--</option>
-          <option *ngFor="let Planet of planetList" value={{Planet.name}}>
-            {{Planet.name}}
-          </option>
-        </select>
-      </div>
-      <!-- <div> -->
-          <!-- <label class="maxWidth">Destination 2: </label>
-          <select (click)="changePlanet2($event.target.value)" class="form-control">
-          
+    <div class="row">
+      <div class="col-sm-2">
+     <label class="maxWidth">Destination 1: </label>
+          <select  name="Planet1" [(ngModel)]="Planet1" (ngModelChange)="Plane1Change()"  class="form-control">
             <option value="0">--All--</option>
             <option *ngFor="let Planet of planetList" value={{Planet.name}}>
                 {{Planet.name}}
             </option>
           </select>
         </div>
-        <div>
+      <div class="col-sm-2">
+     <label class="maxWidth">Destination 2: </label>
+          <select  name="Planet2" [(ngModel)]="Planet2" (ngModelChange)="Plane2Change()" class="form-control">
+            <option value="0">--All--</option>
+            <option *ngFor="let Planet of planetList2" value={{Planet.name}}>
+                {{Planet.name}}
+            </option>
+          </select>
+        </div>
+        <div  class="col-sm-2">
             <label class="maxWidth"> Destination 3: </label>
-            <select (click)="changePlanet3($event.target.value)" class="form-control">
+            <select  name="Planet3" [(ngModel)]="Planet3" (ngModelChange)="Plane3Change()" class="form-control">
               <option value="0">--All--</option>
-              <option *ngFor="let Planet of planetList" value={{Planet.name}}>
+              <option *ngFor="let Planet of planetList3" value={{Planet.name}}>
                   {{Planet.name}}
               </option>
             </select>
           </div>
-          <div >
+          <div  class="col-sm-2">
               <label class="maxWidth">Destination 4: </label>
-              <select (click)="changePlanet4($event.target.value)" class="form-control">
+              <select  name="Planet4" [(ngModel)]="Planet4"  (ngModelChange)="Plane4Change()" class="form-control">
                 <option value="0">--All--</option>
-                <option *ngFor="let Planet of planetList" value={{Planet.name}}>
+                <option *ngFor="let Planet of planetList4" value={{Planet.name}}>
                     {{Planet.name}}
                 </option>
               </select>
             </div>
+            <div class="col-sm-2"></div>
+      </div>
+
+
+  <div class="row">
+    <div class="col-sm-2">
+       <div *ngIf="isPlanet1Selected">
+          <div class="form-check" *ngFor="let Vehicle of vehicleList">
+                <input class="form-check-input"  [(ngModel)]="dest1" type="radio" (ngModelChange)="changePlanet1(Vehicle)"  name="dest1" id="{{Vehicle.name}}+1" value="{{Vehicle.name}}">
+                <label class="form-check-label" for="{{Vehicle.name}}+1">
+                <p>{{Vehicle.name}} <span #radio1>({{Vehicle.total_no}}) </span> </p> 
+                </label>
+          </div> 
+        </div>
+      </div>
+      <div class="col-sm-2" >
+          <div class="" *ngIf="isPlanet2Selected">
+                <div class="form-check" *ngFor="let Vehicle2 of vehicleList2">
+                  <input class="form-check-input"    type="radio"  [(ngModel)]="dest2" (ngModelChange)="changePlanet2(Vehicle2)" name="Planet2" id="{{Vehicle2.name}}+2" value="{{Vehicle2.name}}">
+                  <label class="form-check-label" for="{{Vehicle2.name}}+2">
+                    <p>{{Vehicle2.name}} <span>({{Vehicle2.total_no -totalno}}) </span> </p> 
+                  </label>
+              </div> 
+         </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="" *ngIf="isPlanet3Selected">
+          <div class="form-check" *ngFor="let Vehicle3 of vehicleList3">
+                  <input class="form-check-input" [disabled]="Vehicle3.name==dest1 || Vehicle3.name==dest2" [(ngModel)]="dest3" (ngModelChange)="changePlanet3(Vehicle3)" type="radio" name="dest3" id="{{Vehicle3.name}}+3" value="{{Vehicle3.name}}">
+                  <label class="form-check-label" for="{{Vehicle3.name}}+3">
+                    <p [class.disabled]="Vehicle3.name==dest1 || Vehicle3.name==dest2">{{Vehicle3.name}} <span> ({{Vehicle3.total_no}}) </span> </p> 
+                  </label>
+          </div> 
+         </div>
+      </div>
+      <div class="col-sm-2">
+          <div class="" *ngIf="isPlanet4Selected">
+        <div class="form-check" *ngFor="let Vehicle4 of vehicleList4;let i =index">
+                  <input class="form-check-input" [disabled]="Vehicle4.name!=dest3 " [(ngModel)]="dest4" (ngModelChange)="changePlanet4(Vehicle4)" type="radio" name="dest4" id="{{Vehicle4.name}}+4" value="{{Vehicle4.name}}">
+                  <label class="form-check-label"  for="{{Vehicle4.name}}+4">
+                    <p [class.disabled]="Vehicle4.name!=dest3">{{Vehicle4.name}} <span>({{Vehicle4.total_no}}) </span> </p> 
+                  </label>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-2">
+        <h3>Time taken: {{timeTaken1 +timeTaken2+timeTaken3+timeTaken4}}</h3>
+      </div>
   </div>
+
+
+
+  <div class="row">
+      <div class="text-center">
+          <button class="btn btn-sm text-center btn-primary" (click)="Post()" [disabled]="!isFormValid" >Find Falcone </button>
+        </div>
 </div>
-<div class="container">
- <div class="">
-  <div class="form-check" *ngFor="let Vehicle of vehicleList">
-            <input class="form-check-input" type="radio" name="{{Vehicle.name}}" id="{{Vehicle.name}}" value="{{Vehicle.name}}">
-            <label class="form-check-label" for="{{Vehicle.name}}">
-              {{Vehicle.name}}
-            </label>
-   </div>-->
- </div>
- <div class="">
-    <div class="form-check" *ngFor="let Vehicle of vehicleList">
-              <input class="form-check-input" type="radio" name="{{Vehicle.name}}" id="{{Vehicle.name}}" value="{{Vehicle.name}}">
-              <label class="form-check-label" for="{{Vehicle.name}}">
-                {{Vehicle.name}}
-              </label>
-     </div> 
-   </div>
-   
- <div class="text-center">
-   <button class="text-center">Find Falcone </button>
- </div>
 </div>
+<div class="container-fluid" *ngIf="FinalResult">
+<div class="row text-center">
+    <h2>Finding Falcone</h2>
+    <p>Success! Congratulations on Finding Falcone. King Shan is mightly pleased</p>
+    <p>Time taken: {{timeTaken1 +timeTaken2+timeTaken3+timeTaken4}}</p>
+    <p>Planet Found: {{FinalResult.planet_name}} </p>
+    <button class="btn btn-sm text-center btn-primary" (click)="reset()">Start Again </button>
+</div>
+  
+</div>
+
+
